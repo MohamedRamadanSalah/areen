@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+/* AREEN Investment brand theme — dark, gold-accented luxury.
+   Tokens verified for WCAG AA contrast against the near-black background. */
+@theme {
+  /* Backgrounds */
+  --color-ink: #0a0a0a;
+  --color-ink-soft: #0e0e0e;
+  --color-panel: #121110;
+  --color-card: #17150f;
+  --color-card-hover: #1e1b13;
+
+  /* Brand gold / amber accent */
+  --color-gold: #c9a24b;
+  --color-gold-bright: #e3c377;
+  --color-gold-dim: #a8863b;
+
+  /* Foreground text */
+  --color-fg: #f4f2ec; /* ~15:1 on ink */
+  --color-muted: #a8a29a; /* ~7:1 on ink — passes AA */
+  --color-faint: #6f6a62;
+
+  /* Hairlines / borders */
+  --color-line: rgba(201, 162, 75, 0.16);
+  --color-line-soft: rgba(255, 255, 255, 0.08);
+
+  /* Radii */
+  --radius-card: 0.5rem;
+  --radius-btn: 0.375rem;
+
+  /* Fonts (bound to next/font CSS variables in layout.tsx) */
+  --font-display: var(--font-oswald), "Arial Narrow", sans-serif;
+  --font-body: var(--font-inter), system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  /* Bulletproof reduced-motion contract (FR-022 / SC-007): force every
+     scroll-reveal element to its final, fully-legible state. This !important
+     override wins over Framer Motion's inline (non-important) opacity/transform,
+     so content is never stuck in its hidden initial state. */
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+body {
+  background-color: var(--color-ink);
+  color: var(--color-fg);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Visible, theme-appropriate focus ring for keyboard users (FR-023). */
+:focus-visible {
+  outline: 2px solid var(--color-gold-bright);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+::selection {
+  background: var(--color-gold);
+  color: var(--color-ink);
+}
