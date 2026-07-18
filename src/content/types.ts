@@ -65,6 +65,8 @@ export interface HeroContent {
   tagline: string;
   headlineLines: string[];
   headlineAccentWord: string;
+  /** Words cycled in place of headlineAccentWord; first entry should match it. */
+  rotatingWords?: string[];
   description: string;
   primaryCta: Cta;
   secondaryCta: Cta;

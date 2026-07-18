@@ -4,18 +4,23 @@ import Image from "next/image";
 import type { HeroContent } from "@/content/types";
 import { Button } from "@/components/ui/Button";
 import { SectionReveal } from "@/components/ui/SectionReveal";
+import { RotatingWord } from "@/components/ui/RotatingWord";
 
 interface HeroProps {
   content: HeroContent;
 }
 
-function renderHeadlineLine(line: string, accent: string) {
+function renderHeadlineLine(line: string, accent: string, rotatingWords?: string[]) {
   if (!line.includes(accent)) return line;
   const [before, after] = line.split(accent);
   return (
     <>
       {before}
-      <span className="text-gold">{accent}</span>
+      {rotatingWords && rotatingWords.length > 1 ? (
+        <RotatingWord words={rotatingWords} className="text-gold" />
+      ) : (
+        <span className="text-gold">{accent}</span>
+      )}
       {after}
     </>
   );
@@ -30,24 +35,30 @@ export function Hero({ content }: HeroProps) {
     >
       <div className="mx-auto grid max-w-[1400px] items-center gap-8 px-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-6 lg:px-8">
         {/* Left column: copy */}
-        <SectionReveal className="relative z-10 max-w-2xl py-2 lg:py-4">
-          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.26em] text-gold sm:text-sm">
-            {content.tagline}
-          </p>
-          <h1
-            id="hero-heading"
-            className="font-display font-semibold uppercase leading-[1.08] tracking-[0.01em] text-fg text-[clamp(2.75rem,5.2vw,4.5rem)] lg:leading-[1.05]"
-          >
-            {content.headlineLines.map((line, i) => (
-              <span key={i} className="block lg:whitespace-nowrap">
-                {renderHeadlineLine(line, content.headlineAccentWord)}
-              </span>
-            ))}
-          </h1>
-          <p className="mt-6 max-w-md text-base leading-relaxed text-muted">
-            {content.description}
-          </p>
-          <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:items-center">
+        <SectionReveal className="relative z-10 max-w-2xl py-2 lg:py-4" stagger>
+          <SectionReveal.Item>
+            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.26em] text-gold sm:text-sm">
+              {content.tagline}
+            </p>
+          </SectionReveal.Item>
+          <SectionReveal.Item>
+            <h1
+              id="hero-heading"
+              className="font-display font-semibold uppercase leading-[1.08] tracking-[0.01em] text-fg text-[clamp(2.75rem,5.2vw,4.5rem)] lg:leading-[1.05]"
+            >
+              {content.headlineLines.map((line, i) => (
+                <span key={i} className="block lg:whitespace-nowrap">
+                  {renderHeadlineLine(line, content.headlineAccentWord, content.rotatingWords)}
+                </span>
+              ))}
+            </h1>
+          </SectionReveal.Item>
+          <SectionReveal.Item>
+            <p className="mt-6 max-w-md text-base leading-relaxed text-muted">
+              {content.description}
+            </p>
+          </SectionReveal.Item>
+          <SectionReveal.Item className="mt-9 flex flex-col gap-4 sm:flex-row sm:items-center">
             <Button
               label={content.primaryCta.label}
               href={content.primaryCta.href}
@@ -61,7 +72,7 @@ export function Hero({ content }: HeroProps) {
               icon={content.secondaryCta.icon}
               disabledPlaceholder={content.secondaryCta.placeholder}
             />
-          </div>
+          </SectionReveal.Item>
         </SectionReveal>
 
         {/* Right column: hero building */}

@@ -36,6 +36,7 @@ export const hero: HeroContent = {
   tagline: "BUILDING VALUE. CREATING FUTURES.",
   headlineLines: ["SMART INVESTMENT", "STRONG FUTURE"],
   headlineAccentWord: "FUTURE",
+  rotatingWords: ["FUTURE", "GROWTH", "VALUE", "RETURNS"],
   description:
     "Areen Investment is a leading real estate development company delivering high-quality projects and sustainable returns for our investors and partners.",
   primaryCta: {
@@ -139,9 +140,29 @@ export const footer: FooterContent = {
     { label: "Disclaimer", href: "#", placeholder: true },
   ],
   socials: [
-    { network: "linkedin", href: "#", ariaLabel: "AREEN Investment on LinkedIn", placeholder: true },
-    { network: "twitter", href: "#", ariaLabel: "AREEN Investment on Twitter / X", placeholder: true },
-    { network: "facebook", href: "#", ariaLabel: "AREEN Investment on Facebook", placeholder: true },
-    { network: "instagram", href: "#", ariaLabel: "AREEN Investment on Instagram", placeholder: true },
+    {
+      network: "linkedin",
+      href: "#",
+      ariaLabel: "AREEN Investment on LinkedIn",
+      placeholder: true,
+    },
+    {
+      network: "twitter",
+      href: "#",
+      ariaLabel: "AREEN Investment on Twitter / X",
+      placeholder: true,
+    },
+    {
+      network: "facebook",
+      href: "#",
+      ariaLabel: "AREEN Investment on Facebook",
+      placeholder: true,
+    },
+    {
+      network: "instagram",
+      href: "#",
+      ariaLabel: "AREEN Investment on Instagram",
+      placeholder: true,
+    },
   ],
 };

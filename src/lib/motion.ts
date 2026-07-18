@@ -4,7 +4,7 @@ import type { Variants } from "motion/react";
 // useReducedMotion() at the call site (see SectionReveal) so that reduced-motion
 // visitors get the final state with no transition (FR-022 / SC-007).
 
-const ease: [number, number, number, number] = [0.22, 1, 0.36, 1];
+export const ease: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 export const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
